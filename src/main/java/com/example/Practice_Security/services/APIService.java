@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import org.springframework.web.util.UriComponentsBuilder;
@@ -28,7 +29,8 @@ public class APIService {
 
     private final UnknownDetailsRepository unknownDetailsRepository;
 
-    private final String base_url = "https://reqres.in/";
+    @Value("${api-base-url}")
+    private String base_url;
 
     @Value("${x-api-key}")
     private String secret_key;
@@ -157,24 +159,29 @@ public class APIService {
      */
 
     public RegistrationResponse registerUser(RegistrationDto registrationDto){
-        String url = UriComponentsBuilder
-                .fromUriString(base_url + "api/register")
-                .toUriString();
+        try {
+            String url = UriComponentsBuilder
+                    .fromUriString(base_url + "api/register")
+                    .toUriString();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("x-api-key", secret_key);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("x-api-key", secret_key);
 
-        HttpEntity<RegistrationDto> entity = new HttpEntity<>(registrationDto, headers);
+            HttpEntity<RegistrationDto> entity = new HttpEntity<>(registrationDto, headers);
 
-        ResponseEntity<RegistrationResponse> response = restTemplate.exchange(
-                url,
-                HttpMethod.POST,
-                entity,
-                RegistrationResponse.class
-        );
-        System.out.println(response.getBody());
-        log.info("Response Body: {}", response.getBody());
-        return response.getBody();
+            ResponseEntity<RegistrationResponse> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.POST,
+                    entity,
+                    RegistrationResponse.class
+            );
+            System.out.println(response.getBody());
+            log.info("Response Body: {}", response.getBody());
+            return response.getBody();
+        }
+        catch (RestClientException e){
+            throw new RestClientException("Internal Server Error!");
+        }
 
     }
 }
