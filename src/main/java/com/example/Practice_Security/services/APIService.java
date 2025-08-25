@@ -96,7 +96,10 @@ public class APIService {
                 UnknownPage.class
         );
         UnknownPage unknownPage = response.getBody();
-        UnknownData[] unknownData = unknownPage.getData();
+        UnknownData[] unknownData = null;
+        if (unknownPage != null) {
+            unknownData = unknownPage.getData();
+        }
         if (unknownData != null){
             for (int i = 0; i < unknownPage.getData().length; i++){
                 unknownDetailsRepository.save(unknownData[i]);
@@ -130,34 +133,6 @@ public class APIService {
         return response.getBody();
     }
 
-    /*
-    public UserPatchResponse updateUser(Long id, Map<String, Object> updates) {
-        String uri = UriComponentsBuilder
-                .fromUriString(base_url + "api/users/" + id)
-                .toUriString();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("x-api-key", secret_key);
-
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(updates, headers);
-
-        try {
-            ResponseEntity<UserPatchResponse> response = restTemplate.exchange(
-                    uri,
-                    HttpMethod.POST,
-                    entity,
-                    UserPatchResponse.class
-            );
-            log.info("######## Inside APIService.userUpdate, api response >>>----> {} #########", response);
-
-            return response.getBody();
-        } catch (Exception e) {
-            return new UserPatchResponse(e.getMessage(), null, null);
-        }
-    }
-     */
-
     public RegistrationResponse registerUser(RegistrationDto registrationDto){
         try {
             String url = UriComponentsBuilder
@@ -182,6 +157,5 @@ public class APIService {
         catch (RestClientException e){
             throw new RestClientException("Internal Server Error!");
         }
-
     }
 }

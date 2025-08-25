@@ -1296,3 +1296,8 @@ Identify and stop the process that's listening on port 8080 or configure this ap
 2025-07-21T14:04:10.777+01:00  INFO 25332 --- [Practice_Security] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
 2025-07-21T14:05:53.508+01:00  INFO 25332 --- [Practice_Security] [http-nio-8080-exec-3] c.e.P.services.APIService                : Response Body: RegistrationResponse(id=1, token=QpwL5tke4Pnpja7X1)
 2025-07-21T14:06:13.689+01:00  INFO 25332 --- [Practice_Security] [http-nio-8080-exec-4] c.e.P.services.APIService                : Response Body: RegistrationResponse(id=1, token=QpwL5tke4Pnpja7X1)
+2025-07-21T16:54:55.417+01:00  INFO 25332 --- [Practice_Security] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-07-21T16:54:55.546+01:00  INFO 25332 --- [Practice_Security] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-07-21T16:54:55.673+01:00  INFO 25332 --- [Practice_Security] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-07-21T16:54:55.994+01:00  INFO 25332 --- [Practice_Security] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-07-21T16:54:56.113+01:00  INFO 25332 --- [Practice_Security] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

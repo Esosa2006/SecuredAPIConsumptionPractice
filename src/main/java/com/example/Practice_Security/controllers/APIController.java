@@ -7,15 +7,12 @@ import com.example.Practice_Security.dtos.registerUser.RegistrationResponse;
 import com.example.Practice_Security.dtos.unknownData.UnknownData;
 import com.example.Practice_Security.dtos.userCreate.UserCreateRequest;
 import com.example.Practice_Security.dtos.userCreate.UserCreateResponse;
-import com.example.Practice_Security.dtos.userPatch.UserPatchRequest;
-import com.example.Practice_Security.dtos.userPatch.UserPatchResponse;
 import com.example.Practice_Security.services.APIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -62,6 +59,5 @@ public class APIController {
     public RegistrationResponse registerUser(@RequestBody RegistrationDto registrationDto){
         return apiService.registerUser(registrationDto);
     }
-
 
 }
